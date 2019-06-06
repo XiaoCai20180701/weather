@@ -1,0 +1,61 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "新鲜天气小程序，主要展现天气数据，心情签到",
+  "main": "gulpfile.js",
+  "scripts": {
+    "server": "nodemon ./server/index.js",
+    "start": "gulp watch",
+    "dev": "gulp dev",
+    "cloud": "gulp cloud:dev",
+    "build": "gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "book/*",
+      "client/*",
+      "bin/*",
+      "node_modules",
+      "dist/*",
+      "package.json"
+    ],
+    "delay": "1000"
+  },
+  "author": "XiaoCai20180701 <421586311@qq.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "ansi-colors": "^3.2.4",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "cheerio": "^1.0.0-rc.3",
+    "cross-env": "^5.2.0",
+    "del": "^4.1.1",
+    "express": "^4.17.1",
+    "fancy-log": "^1.3.3",
+    "file-stream-rotator": "^0.4.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-filter": "^6.0.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-jdists": "^2.2.3",
+    "gulp-jsonminify": "^1.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "minimist": "^1.2.0",
+    "nodemon": "^1.19.1",
+    "postcss": "^7.0.16",
+    "postcss-font-base64": "^1.0.5",
+    "postcss-px2rpx": "0.0.4",
+    "request": "^2.88.0",
+    "run-sequence": "^2.2.1",
+    "stream-combiner2": "^1.1.1"
+  }
+}

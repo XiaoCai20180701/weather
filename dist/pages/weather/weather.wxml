@@ -1,0 +1,107 @@
+<wxs src="./weather.wxs" module="utils"></wxs>
+<view class="wrapper" style="background:url({{backgroundImage}}) center -178rpx / 100% no-repeat {{backgroundColor}};">
+  <view class="container" id="canvas-wrapper" style="padding-top: 100rpx;">
+    <view class="now">
+      <!--当前实时天气和空气质量-->
+      <view class="location" bindtap="chooseLocation">
+        <icon type='dingwei'></icon>
+        <text>{{address}}</text>
+      </view>
+      <view class='air-quality'>
+        <text class="circle" style="background: red"></text>
+        <text class="value">{{ air.name }} {{ air.aqi }}</text>
+      </view>
+      <view class='now-weather'>
+        <view class='temp'>
+          <text>{{current.temp}}</text>
+          <text class='degree'>°</text>
+        </view>
+        <view class="cur-weather">
+          <view class='inline'>
+            <icon type="{{current.icon}}" />
+            <text>{{current.weather}}</text>
+          </view>
+          <view class='inline today'>
+            <text class="item">湿度 {{utils.humidity(current.humidity)}} %  </text>
+            <text class="item">{{current.wind}} {{current.windLevel}}级 </text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="two-days">
+      <!--今明两天天气-->
+      <view class="item">
+        <view class="top">
+          <text class="date">今天</text>
+          <text class="temp">{{ today.temp }}</text>
+        </view>
+        <view class="bottom">
+          <text>{{ today.weather }}</text>
+          <icon type="{{ today.icon }}" class="logo"></icon>
+        </view>
+      </view>
+      <view class="item">
+        <view class="top">
+          <text class="date">明天</text>
+          <text class="temp">{{ tomorrow.temp }}</text>
+        </view>
+        <view class="bottom">
+          <text>{{ tomorrow.weather }}</text>
+          <icon type="{{ tomorrow.icon }}" class="logo"></icon>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='weather' style="background-color:{{backgroundColor}}">
+    <view class='container'>
+      <!--24小时天气-->
+      <scroll-view scroll-x class="hourly">
+        <view class="scrollX">
+          <view class="item" wx:for="{{hourlyData}}" wx:key="{{index}}">
+            <text class="time">{{ item.time }}</text>
+            <icon type="{{item.icon}}" class="icon"></icon>
+            <text class="temp">{{item.temp}}°</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="container">
+      <!--7天天气-->
+      <view class="week">
+        <view class="week-weather">
+          <view class="item" wx:for="{{weeklyData}}" wx:key="{{index}}">
+            <view class="day">{{ utils.formatWeeklyDate(index) }}</view>
+            <view class="date">{{ utils.formatDate(item.time) }}</view>
+            <view class="daytime">
+              <view class="wt">{{item.day}}</view>
+              <icon type="{{item.dayIcon}}" class="img"></icon>
+            </view>
+            <view class="night">
+              <icon type="{{item.nightIcon}}" class="img"></icon>
+              <view class="wt">{{item.night}}</view>
+            </view>
+            <view class="wind">{{ utils.wind(item.nightWind) }}</view>
+            <view class="wind" wx:if="{{item.nightWind}}">{{ utils.windLevel(item.nightWindLevel) }}</view>
+            <view class="wind" wx:else></view>
+          </view>
+        </view>
+      </view>
+      <view class="container">
+        <!--生活指数-->
+        <view class="life-style">
+          <view class="item" wx:for="{{lifeStyle}}" wx:key="{{index}}" data-name="{{item.name}}" data-detail="{{item.detail}}" bindtap="indexDetail">
+            <view class="title">
+              <icon type="{{item.icon}}"></icon>
+              {{item.name}}
+            </view>
+            <view class="content">{{item.info}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="source">
+    <text wx:if="{{oneWord===''}}">· 如果没有阳光，就在心里点一只蜡烛 ·</text>
+    <text wx:else>{{oneWord}}</text>
+  </view>
+</view>

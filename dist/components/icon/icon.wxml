@@ -1,0 +1,2 @@
+<!--client/components/icon.wxml-->
+<text class="icon icon-{{type}}"></text>
