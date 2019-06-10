@@ -85,6 +85,9 @@
             <view class="wind" wx:else></view>
           </view>
         </view>
+        <view class="week-chart">
+          <canvas canvas-id="chart" id="chart"></canvas>
+        </view>
       </view>
       <view class="container">
         <!--生活指数-->
