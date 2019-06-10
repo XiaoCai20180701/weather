@@ -323,3 +323,14 @@ icon {
   line-height: 1;
   white-space: nowrap;
 }
+.week-chart {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 272rpx;
+  top: 262rpx;
+}
+.week-chart canvas {
+  width: 750rpx;
+  height: 272rpx;
+}
