@@ -1,17 +1,23 @@
-//index.js
+/*<remove trigger="prod">*/
+import { geocoder } from '../../lib/api'
+import { getWeather, getAir } from '../../lib/api-mock'
+/*</remove>*/
+
+/*<jdists trigger="prod">
+import { geocoder, getWeather, getAir} from '../../lib/api'
+</jdists>*/
 import {
-  geocoder
-} from '../../lib/api'
-import {
-  getWeather,
-  getAir
-} from '../../lib/api-mock'
-import { fixChart, getChartConfig } from '../../lib/utils'
+  fixChart,
+  getChartConfig,
+  drawEffect
+} from '../../lib/utils'
 import Chart from '../../lib/chartjs/chart'
 //获取应用实例
 const app = getApp()
 const CHART_CANVAS_HEIGHT = 272 / 2
+const EFFECT_CANVAS_HEIGHT = 768 /2 
 let isUpdate = false
+let effectInstance
 
 Page({
   data: {
@@ -287,13 +293,20 @@ Page({
   },
   onShareAppMessage() {
     // 如果获取数据失败，则没有位置和天气信息，那么需要个默认文案
-    if (!isUpdate){
+    if (!isUpdate) {
       return {
         title: '我发现一个好玩的天气小程序，分享给你看看！',
         path: '/pages/weather/weather'
       }
-    }else {
-      const {lat, lon, address, province, city, county} = this.data
+    } else {
+      const {
+        lat,
+        lon,
+        address,
+        province,
+        city,
+        county
+      } = this.data
       return {
         title: `「${address}」现在天气情况，快打开看看吧！`,
         path: '/pages/weather/weather?lat=${lat}&lon=${lon}&address=${address}&province=${province}&city=${city}&county=${county}'
@@ -314,7 +327,8 @@ Page({
       daily,
       hourly,
       lifeStyle,
-      oneWord = ''
+      oneWord = '',
+      effect
     } = data
     const {
       backgroundColor,
@@ -340,22 +354,37 @@ Page({
       hourlyData: hourly,
       weeklyData: daily,
       current: current,
-      backgroundImage:backgroundImage,
-      backgroundColor:backgroundColor,
-      today:today,
-      tomorrow:tomorrow,
+      backgroundImage: backgroundImage,
+      backgroundColor: backgroundColor,
+      today: today,
+      tomorrow: tomorrow,
       oneWord: oneWord,
       lifeStyle: lifeStyle
     })
+  
+    this.stopEffect()
+
+    if (effect && effect.name) {
+      effectInstance = drawEffect('effect', effect.name, width, EFFECT_CANVAS_HEIGHT * scale, effect.amount)
+    }
 
     //chart画图
     this.drawChart()
   },
+  stopEffect() {
+    if (effectInstance && effectInstance.clear) {
+      effectInstance.clear()
+    }
+  },
   drawChart() {
-    const { width, scale, weeklyData } = this.data
+    const {
+      width,
+      scale,
+      weeklyData
+    } = this.data
     let height = CHART_CANVAS_HEIGHT * scale
     let ctx = wx.createCanvasContext('chart')
-    fixChart(ctx,width,height)
+    fixChart(ctx, width, height)
     // 添加温度
     // Chart.pluginService.register({
     //   afterDatasetsDraw(e, t) {
