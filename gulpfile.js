@@ -21,12 +21,10 @@ const runSequence = require('run-sequence')
 const sourcemaps = require('gulp-sourcemaps')
 const filter = require('gulp-filter')
 const jdists = require('gulp-jdists')
-const plumber = require('gulp-plumber')
 
 const src = './client'
 const dist = './dist'
 const isProd = process.env.NODE_ENV === 'production' || false; // 'development'
-//const isProd = false
 
 const handleError = (err) => {
   console.log('\n')
@@ -77,7 +75,6 @@ gulp.task('js', () => {
   const f = filter((file) => !/(mock)/.test(file.path))
   gulp
     .src(`${src}/**/*.js`)
-    .pipe(plumber())
     .pipe(isProd ? f : through.obj())
     .pipe(
       isProd
@@ -89,11 +86,11 @@ gulp.task('js', () => {
         })
     )
     .pipe(isProd ? through.obj() : sourcemaps.init())
-    // .pipe(
-    //   babel({
-    //     presets: ['env']
-    //   })
-    // )
+    .pipe(
+      babel({
+        presets: ['env']
+      })
+    )
     .pipe(
       isProd
         ? uglify({
@@ -102,7 +99,6 @@ gulp.task('js', () => {
         : through.obj()
     )
     .pipe(isProd ? through.obj() : sourcemaps.write('./'))
-    .pipe(plumber.stop())
     .pipe(gulp.dest(dist))
 })
 
@@ -118,7 +114,7 @@ gulp.task('clean', () => {
   return del(['./dist/**'])
 })
 
-gulp.task('dev', () => {
+gulp.task('dev', ['clean'], () => {
   runSequence('json', 'images', 'wxml', 'wxss', 'js', 'wxs', 'cloud', 'watch')
 })
 
