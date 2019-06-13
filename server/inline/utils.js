@@ -3,7 +3,7 @@
  const USER_ID = 'HE1906051429501627'
  const path = require('path')
 
-const STATIC_SERVER_URL = 'http://127.0.0.1:3000/static'
+const STATIC_SERVER_URL = 'http://192.168.2.108:3000/static'
 
 const BACKGROUND_PERFIXER = `${STATIC_SERVER_URL}/bg`
 const WEATHER_IMAGE_PERFIXER = `${STATIC_SERVER_URL}/icon`
@@ -346,10 +346,10 @@ const $ = {
   },
   _hourly: (data, _data) => {
     let hourly = []
-    let { sr, ss } = _data.daily_forecast[0]
+    let {sr, ss} = _data.daily_forecast[0]
 
-    for (let i = 0; i < _data.length; i++) {
-      let r = _data[i]
+    for (let i = 0; i < data.length; i++) {
+      let r = data[i]
       if (!r || !r.time) {
         break
       }
@@ -370,7 +370,6 @@ const $ = {
     return hourly
   },
   _daily: (data) => {
-    console.log('_daily',data)
     let weekly = []
     for (let i = 0; i <= 6; i++) {
       let r = data[i]
@@ -446,12 +445,12 @@ const $ = {
       let { now, daily_forecast, lifestyle, hourly } = result  
       return {
         status: 0,
-      //  effect: $.getEffectSettings(now.cond_code),
+        effect: $.getEffectSettings(now.cond_code),
         oneWord: $.getOneWord(now.cond_code),
         current: $._now(now, result),
-       // hourly: $._hourly(hourly, result),
+        hourly: $._hourly(hourly, result),
         lifeStyle: $._lifestyle(lifestyle),
-      //  daily: $._daily(daily_forecast)
+        daily: $._daily(daily_forecast)
       }
     } else {
       return {
