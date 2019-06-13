@@ -3,7 +3,12 @@
 const API_URL = 'https://free-api.heweather.com/s6/air/now'
 const request = require('request')
 
+// const $ = require('../../inline/utils')
+/*<jdists import="../../inline/utils.js" />*/
+
+/*<remove>*/
 const $ = require('../../inline/utils')
+/*</remove>*/
 
 exports.main = async(event) => {
   let location = event.city
