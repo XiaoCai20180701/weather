@@ -8,7 +8,7 @@
     "start": "gulp watch",
     "dev": "gulp dev",
     "cloud": "gulp cloud:dev",
-    "build": "gulp build",
+    "build": "cross-env NODE_ENV=production gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "nodemonConfig": {
@@ -22,6 +22,9 @@
       "package.json"
     ],
     "delay": "1000"
+  },
+  "engines": {
+    "node": ">=8"
   },
   "author": "XiaoCai20180701 <421586311@qq.com>",
   "license": "ISC",
@@ -37,7 +40,7 @@
     "fancy-log": "^1.3.3",
     "file-stream-rotator": "^0.4.1",
     "gulp": "^3.9.1",
-    "gulp-babel": "^8.0.0",
+    "gulp-babel": "^7.0.0",
     "gulp-cssnano": "^2.1.3",
     "gulp-filter": "^6.0.0",
     "gulp-htmlmin": "^5.0.1",
@@ -57,5 +60,8 @@
     "request": "^2.88.0",
     "run-sequence": "^2.2.1",
     "stream-combiner2": "^1.1.1"
+  },
+  "dependencies": {
+    "wx-server-sdk": "^0.6.1"
   }
 }
