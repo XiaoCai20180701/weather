@@ -49,5 +49,5 @@ app.get('/api/he-air', (req, res, next) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`开发服务器启动成功：http://127.0.0.1:${PORT}`)
+  console.log(`开发服务器启动成功：http://192.168.2.108:${PORT}`)
 })
