@@ -1,5 +1,7 @@
 项目结构：
+
 ├── README.md
+
 ├── client                    // 小程序 client 部分，主要编写内容
 │   ├── app.js
 │   ├── app.json
