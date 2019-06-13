@@ -1,9 +1,9 @@
 import Promise from './bluebird'
 const QQ_MAP_KEY = 'ZVXBZ-D6JKU-4IRVY-2OHZB-RCSVK-LQFU6'
 const KEY = '39a99e9fec4d47f8911a7be8235e29d1'
-
+const URL = 'http://192.168.2.108:3000'
 // wx.cloud.init({
-//   env: 'hao-weather-2752f1'
+//   env: 'weather-dev-b33i3'
 // })
 /**
  *  逆经纬度查询
@@ -28,7 +28,7 @@ export const geocoder = (lat, lon, success = () => { }, fail = () => { }) => {
   //     lon
   //   }
   // })
-  //
+  
   // return $.request({
   //   url: SERVER_URL + '/api/geocoder',
   //   data: {
@@ -40,7 +40,7 @@ export const geocoder = (lat, lon, success = () => { }, fail = () => { }) => {
 export const getWeather = (lat, lon) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'http://127.0.0.1:3000/api/he-weather' ,
+      url: URL + '/api/he-weather' ,
       data: {
         lat,
         lon
@@ -58,7 +58,7 @@ export const getWeather = (lat, lon) => {
 export const jscode2session = (code) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'http://127.0.0.1:3000/api/jscode2session',
+      url: URL + '/api/jscode2session',
       data: {
         code
       },
@@ -72,7 +72,7 @@ export const jscode2session = (code) => {
 export const getAir = (city) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'http://127.0.0.1:3000/api/he-air',
+      url: URL + '/api/he-air',
       data: {
         city
       },
