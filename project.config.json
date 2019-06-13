@@ -22,10 +22,11 @@
 			"outputPath": ""
 		}
 	},
+	"cloudfunctionRoot": "server/cloud-functions/",
 	"miniprogramRoot": "dist/",
 	"compileType": "miniprogram",
 	"libVersion": "2.7.1",
-	"appid": "wxf68b71b652d3e933",
+	"appid": "wx83a301df9f1473ec",
 	"projectname": "weather-mini-program",
 	"cloudfunctionTemplateRoot": "",
 	"debugOptions": {
