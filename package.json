@@ -52,7 +52,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "nodemon": "^1.19.1",
     "postcss": "^7.0.16",
     "postcss-font-base64": "^1.0.5",
